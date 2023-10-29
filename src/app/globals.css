@@ -1,0 +1,19 @@
+body {
+  background: linear-gradient(120deg, #1b2932 , #4A5B6A 90%);
+  background-size: cover; 
+  background-attachment: fixed; 
+}
+
+h1, h2, h3, h4, h5 , h6{
+  color: #B4C5D8
+}
+
+/* 
+Dark to ligth 
+
+#263A47
+#4A5B6A
+#728495
+#98A9BE
+#B4C5D8
+*/

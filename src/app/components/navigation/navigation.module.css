@@ -1,0 +1,33 @@
+
+
+  .container{
+    border: 1px solid gray;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    border-radius: 2px;
+  }
+  
+  .topnav {
+    display: flex;
+    background-color: transparent;
+    justify-content: center;
+  }
+  
+  .topnav a {
+    color: #B4C5D8;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+
+    border-radius: 2px;
+  }
+  
+  .topnav a:hover {
+    background-color: #728495;
+    color: #263A47;
+  }
+  
+  .topnav a.active {
+    background-color: #728495;
+    color: #263A47;
+  }
