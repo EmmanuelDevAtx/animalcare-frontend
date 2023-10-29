@@ -1,11 +1,10 @@
 import Image from 'next/image'
+import { Navigation } from './components/navigation/navigation'
 
 export default function Home() {
   return (
     <main> 
-      <h1 style={{color:'red'}}>
-        ola mundo
-      </h1>
+      <Navigation/>
     </main>
   )
 }
