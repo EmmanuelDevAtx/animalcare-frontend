@@ -1,10 +1,12 @@
-import Image from 'next/image'
+'use client';
 import { Navigation } from './components/navigation/navigation'
+import { ConnectWallet } from './components/connectWallet/connectWallet'
 
 export default function Home() {
   return (
     <main> 
       <Navigation/>
+      <ConnectWallet/>
     </main>
   )
 }
