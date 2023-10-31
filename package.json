@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "ethers": "^5.7.0",
+    "@walletconnect/modal": "^2.6.2",
+    "@web3modal/ethers5": "^3.2.0",
+    "ethers": "^5.7.2",
     "next": "14.0.0",
     "react": "^18",
     "react-dom": "^18"
