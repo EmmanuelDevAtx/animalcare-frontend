@@ -1,6 +1,8 @@
+
+'use client'
 import { useWeb3ModalAccount } from "@web3modal/ethers5/react";
 import styles from "./navigation.module.css";
-import { useRouter } from "next/navigation";
+// import { useRouter } from 'next/navigation';
 import { useEffect } from "react";
 import { createWeb3Modal, defaultConfig } from "@web3modal/ethers5/react";
 import { ConnectWallet } from "../connectWallet/connectWallet";
@@ -48,28 +50,25 @@ export const Navigation = () => {
   });
 
   const { address, isConnected } = useWeb3ModalAccount();
-  const router = useRouter();
-  useEffect(() => {
-    console.log('isConnected ', isConnected);
-    console.log('address ', address);
-  }, [isConnected, address]);
+  // const router = useRouter();
+  useEffect(() => {}, [isConnected, address]);
 
-  if (address && isConnected) {
-    router.push("/animalHome");
-  }else{
-    router.push("/")
-  }
+  // if (address && isConnected) {
+  //   router.push("/animalHome");
+  // } else {
+  //   router.push("/");
+  // }
   return (
     <div className={styles.topnav}>
       <div className={styles.container}>
         <a className={styles.active} href="/">
-          Home
+          Landing
         </a>
-        <a href="/animalHome">News</a>
+        <a href="/animalHome">Animal home</a>
         <a href="#contact">Contact</a>
         <a href="#about">About</a>
       </div>
-      <ConnectWallet/>
+      <ConnectWallet />
     </div>
   );
 };
