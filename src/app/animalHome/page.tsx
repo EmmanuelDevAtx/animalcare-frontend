@@ -1,122 +1,90 @@
 "use client";
-import { useWeb3Modal, useWeb3ModalAccount, useWeb3ModalSigner } from "@web3modal/ethers5/react";
-import { ContractAnimalCareABi } from "../contract/contractAnimalCareAbi";
-import { ethers } from "ethers";
-import { useEffect, useState } from "react";
-import { AnimalType } from "../types/animalType";
-import { useRouter } from "next/navigation";
+import { useWeb3ModalSigner } from "@web3modal/ethers5/react";
+import { useContext, useEffect } from "react";
+import { ContractContext } from "../hooks/contractActions";
 
 export default function AnimalHome() {
-  const { address, isConnected } = useWeb3ModalAccount()
   const { walletProvider, signer } = useWeb3ModalSigner();
-  const [animalData, setAnimalData] = useState<AnimalType | null>(null);
-  const router = useRouter();
 
-  const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
-
-  const animalCare = new ethers.Contract(
-    contractAddress,
-    ContractAnimalCareABi,
-    walletProvider
-  );
-
-
-  const contractSigner: any = animalCare.connect(signer as ethers.Signer);
-
-  async function createNewAnimal() {
-    const response = await contractSigner.createNewAnimal("juanito");
-    console.log(" response ", response);
-  }
-
-  async function showItems() {
-    const response = await contractSigner.getAnimalsOwner({});
-    console.log(" response  gert total animal", response);
-  }
-
-  async function CurrentAnimal(){
-    const response = await contractSigner.animals(0);
-    console.log(' res  ', response)
-    setAnimalData(response);
-  }
-
-  async function EatAnimal(){
-    const response = await contractSigner.feedAnimal(0,0);
-    setAnimalData(response);
-  }
-
-  async function SharedAnimal(){
-    const response  = await contractSigner.sharedAnimal(0, address);
-    console.log('response ', response)
-  }
+  const {
+    GetOwnFood,
+    foodData,
+    animalData,
+    CreateNewAnimal,
+    GetOwnAnimals,
+    CurrentAnimal,
+    EatAnimal,
+    SharedAnimal,
+  } = useContext(ContractContext);
 
   return (
     <div>
       <h1>animal home </h1>
       <button
         className="transition duration-150 ease-in-out walletBottom rounded-lg outline outline-offset-2 outline-blue-500 "
-        onClick={createNewAnimal}
+        onClick={() => CreateNewAnimal("Juan1")}
       >
-        <h1>try something</h1>
+        <h1>Create animal</h1>
       </button>
       <button
         className="transition duration-150 ease-in-out walletBottom rounded-lg outline outline-offset-2 outline-blue-500 "
-        onClick={showItems}
+        onClick={GetOwnAnimals}
       >
         <h1>show total owner</h1>
       </button>
 
       <button
         className="transition duration-150 ease-in-out walletBottom rounded-lg outline outline-offset-2 outline-blue-500 "
-        onClick={CurrentAnimal}
+        onClick={() => CurrentAnimal(0)}
       >
-        <h1>aniaml</h1>
+        <h1>curretn animal</h1>
       </button>
 
       <button
         className="transition duration-150 ease-in-out walletBottom rounded-lg outline outline-offset-2 outline-blue-500 "
-        onClick={EatAnimal}
+        onClick={() => EatAnimal(0,2)}
       >
         <h1>eat animal</h1>
       </button>
 
       <button
         className="transition duration-150 ease-in-out walletBottom rounded-lg outline outline-offset-2 outline-blue-500 "
-        onClick={SharedAnimal}
+        onClick={() =>
+          SharedAnimal(0, "0x9682F711672ca97c5098e0ee841d695be84687B8")
+        }
       >
         <h1>shared</h1>
       </button>
 
-      <h1>
-        canFeed {animalData?.canFeed ? 'true':'false'}
-      </h1>
+      <button
+        className="transition duration-150 ease-in-out walletBottom rounded-lg outline outline-offset-2 outline-blue-500 "
+        onClick={GetOwnFood}
+      >
+        <h1>get own food</h1>
+      </button>
 
-      <h1>
-        canPlay {animalData?.canPlay ? 'true':'false'}
-      </h1>
+      <h1>canFeed {animalData?.canFeed ? "true" : "false"}</h1>
 
-      <h1>
-        currentPoints {animalData?.currentPoints}
-      </h1>
+      <h1>canPlay {animalData?.canPlay ? "true" : "false"}</h1>
 
-      <h1>
-        feedCount {animalData?.feedCount}
-      </h1>
+      <h1>currentPoints {animalData?.currentPoints}</h1>
+
+      <h1>feedCount {animalData?.feedCount}</h1>
 
       {/* <h1>
         level {animalData?.level}
       </h1> */}
 
-      <h1>
-        name {animalData?.name}
-      </h1>
+      <h1>name {animalData?.name}</h1>
 
-      <h1>
-        needsBathroom {animalData?.needsBathroom ? 'true':'false'}
-      </h1>
+      <h1>needsBathroom {animalData?.needsBathroom ? "true" : "false"}</h1>
 
-      <h1>
-        tired {animalData?.tired  ? 'true':'false'}
-      </h1>
+      <h1>tired {animalData?.tired ? "true" : "false"}</h1>
+
+      <h5>soap_simple {foodData?.soap_simple}</h5>
+      <h5>soap_medium {foodData?.soap_medium}</h5>
+      <h5>soap_premium {foodData?.soap_premium}</h5>
+      <h5>carrot {foodData?.carrot}</h5>
     </div>
   );
 }

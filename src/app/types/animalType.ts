@@ -11,3 +11,10 @@ export type AnimalType = {
     name: string;
     // timeBathroomUse: string | number | any;
 };
+
+export type FoodType = {
+    carrot: number;
+    soap_medium: number;
+    soap_premium: number;
+    soap_simple: number;
+};
