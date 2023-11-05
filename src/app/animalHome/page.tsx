@@ -20,10 +20,7 @@ export default function AnimalHome() {
     walletProvider
   );
 
-  useEffect(()=>{
-    router.push('/')
-  },[])
-  
+
   const contractSigner: any = animalCare.connect(signer as ethers.Signer);
 
   async function createNewAnimal() {
