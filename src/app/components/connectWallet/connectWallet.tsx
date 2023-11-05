@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { useWeb3Modal } from "@web3modal/ethers5/react";
+import { useEffect, useState } from "react";
+import { useWeb3Modal, useWeb3ModalAccount } from "@web3modal/ethers5/react";
 
 export const ConnectWallet = () => {
-  
-
-  const [current, setAccount] = useState<string>();
-
-  const { open, close } = useWeb3Modal();
+  const { open } = useWeb3Modal();
+  const { address, isConnected } = useWeb3ModalAccount();
 
   return (
     <div>
-      <button onClick={() => open()}> collect your walelt</button>;
+      <button onClick={() => open()}>
+        {isConnected ? "showwallet" : "collect your walelt"}
+      </button>
+      ;
     </div>
   );
 };

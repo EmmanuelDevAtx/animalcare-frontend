@@ -7,7 +7,7 @@ export default function AnimalHome() {
   return (
     <div>
       <h1>animal home </h1>
-      <button > disoncect</button>
+      <button onClick={()=>open()}> disoncect</button>
     </div>
   );
 }

@@ -1,13 +1,14 @@
-
 'use client'
-import { useWeb3ModalAccount } from "@web3modal/ethers5/react";
 import styles from "./navigation.module.css";
-// import { useRouter } from 'next/navigation';
-import { useEffect } from "react";
-import { createWeb3Modal, defaultConfig } from "@web3modal/ethers5/react";
+import { createWeb3Modal, defaultConfig, useWeb3ModalAccount } from "@web3modal/ethers5/react";
 import { ConnectWallet } from "../connectWallet/connectWallet";
+import { useRouter, usePathname } from "next/navigation";
+import { useEffect } from "react";
+
 
 export const Navigation = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   // 1. Get projectId
   const projectId = "4a579dd8af908597dde1544a62e922b7";
 
@@ -23,9 +24,9 @@ export const Navigation = () => {
   const mumbai = {
     chainId: 80001,
     name: "Mumbai",
-    currency: "Matic",
+    currency: "MATIC",
     explorerUrl: "https://mumbai.polygonscan.com/",
-    rpcUrl: "https://rpc-mumbai.maticvigil.com",
+    rpcUrl: "https://rpc.ankr.com/polygon_mumbai"
   };
 
   // 3. Create modal
@@ -48,27 +49,27 @@ export const Navigation = () => {
     chains: [mainnet, mumbai],
     projectId,
   });
-
   const { address, isConnected } = useWeb3ModalAccount();
-  // const router = useRouter();
-  useEffect(() => {}, [isConnected, address]);
 
-  // if (address && isConnected) {
-  //   router.push("/animalHome");
-  // } else {
-  //   router.push("/");
-  // }
+  
+  useEffect(() => {
+    if (isConnected) {
+      router.push("/animalHome");
+    }
+  }, []);
+
+  console.log('router', pathname)
   return (
-    <div className={styles.topnav}>
+    <nav className={styles.topnav}>
       <div className={styles.container}>
-        <a className={styles.active} href="/">
+        <a className={pathname == '/'? styles.active:''} href="/">
           Landing
         </a>
-        <a href="/animalHome">Animal home</a>
+        <a href="/animalHome" className={pathname == '/animalHome'? styles.active:''}>Animal home</a>
         <a href="#contact">Contact</a>
         <a href="#about">About</a>
       </div>
       <ConnectWallet />
-    </div>
+    </nav>
   );
 };
