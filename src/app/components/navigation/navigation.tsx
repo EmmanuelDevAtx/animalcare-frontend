@@ -31,6 +31,14 @@ export const Navigation = () => {
     rpcUrl: "https://rpc.ankr.com/polygon_mumbai",
   };
 
+  const local = {
+    chainId: 80001,
+    name: "local ETH",
+    currency: "ETH",
+    explorerUrl: "http://127.0.0.1:8545/",
+    rpcUrl: "http://127.0.0.1:8545/",
+  };
+
   // 3. Create modal
   const metadata = {
     name: "Animal care",
@@ -48,7 +56,7 @@ export const Navigation = () => {
       enableCoinbase: true,
       rpcUrl: "...", // used for the Coinbase SDK
     }),
-    chains: [mainnet, mumbai],
+    chains: [mainnet, mumbai, local],
     projectId,
   });
   const { isConnected } = useWeb3ModalAccount();

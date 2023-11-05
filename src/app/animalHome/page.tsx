@@ -12,7 +12,7 @@ export default function AnimalHome() {
   const [animalData, setAnimalData] = useState<AnimalType | null>(null);
   const router = useRouter();
 
-  const contractAddress = "0x65b2D0d5e5dA1f485C97ecF237a79C34BA18Ab0c";
+  const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
 
   const animalCare = new ethers.Contract(
     contractAddress,
