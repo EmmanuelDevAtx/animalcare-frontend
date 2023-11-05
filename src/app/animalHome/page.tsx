@@ -22,7 +22,8 @@ export default function AnimalHome() {
 
   useEffect(()=>{
     router.push('/')
-  },[isConnected])
+  },[])
+  
   const contractSigner: any = animalCare.connect(signer as ethers.Signer);
 
   async function createNewAnimal() {
