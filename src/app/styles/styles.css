@@ -1,0 +1,13 @@
+.new-page{
+    padding: 70px;
+}
+
+.card-animal{
+    background-color: gray;
+    height: 100px;
+    width: 100px;
+}
+
+.jc{
+    justify-items: center;
+}

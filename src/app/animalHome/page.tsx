@@ -1,11 +1,12 @@
 "use client";
 import { useWeb3ModalSigner } from "@web3modal/ethers5/react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ContractContext } from "../hooks/contractActions";
+import "../styles/background.css";
 
 export default function AnimalHome() {
   const { walletProvider, signer } = useWeb3ModalSigner();
-
+  const [animalsOwner, setAnimalsOwner] = useState<any[]>([]);
   const {
     GetOwnFood,
     foodData,
@@ -17,74 +18,38 @@ export default function AnimalHome() {
     SharedAnimal,
   } = useContext(ContractContext);
 
+
+  function fetchData(){
+    setAnimalsOwner([]);
+    async function getAlldata(){
+      const animals = await GetOwnAnimals();
+      console.log('animals ', animals.length)
+      for(let i = 0; i < animals.length ; i++){
+        const currentAnimal = await CurrentAnimal(i);
+        setAnimalsOwner([...animalsOwner, currentAnimal]);
+      }
+    }
+    getAlldata();
+  }
+  // useEffect(()=>{
+  //   setTimeout(fetchData, 3000);
+  // }, []);
+  console.log('totalAnimals ', animalsOwner);
+
   return (
-    <div>
-      <h1>animal home </h1>
-      <button
-        className="transition duration-150 ease-in-out walletBottom rounded-lg outline outline-offset-2 outline-blue-500 "
-        onClick={() => CreateNewAnimal("Juan1")}
-      >
-        <h1>Create animal</h1>
-      </button>
-      <button
-        className="transition duration-150 ease-in-out walletBottom rounded-lg outline outline-offset-2 outline-blue-500 "
-        onClick={GetOwnAnimals}
-      >
-        <h1>show total owner</h1>
-      </button>
-
-      <button
-        className="transition duration-150 ease-in-out walletBottom rounded-lg outline outline-offset-2 outline-blue-500 "
-        onClick={() => CurrentAnimal(0)}
-      >
-        <h1>curretn animal</h1>
-      </button>
-
-      <button
-        className="transition duration-150 ease-in-out walletBottom rounded-lg outline outline-offset-2 outline-blue-500 "
-        onClick={() => EatAnimal(0,2)}
-      >
-        <h1>eat animal</h1>
-      </button>
-
-      <button
-        className="transition duration-150 ease-in-out walletBottom rounded-lg outline outline-offset-2 outline-blue-500 "
-        onClick={() =>
-          SharedAnimal(0, "0x9682F711672ca97c5098e0ee841d695be84687B8")
-        }
-      >
-        <h1>shared</h1>
-      </button>
-
-      <button
-        className="transition duration-150 ease-in-out walletBottom rounded-lg outline outline-offset-2 outline-blue-500 "
-        onClick={GetOwnFood}
-      >
-        <h1>get own food</h1>
-      </button>
-
-      <h1>canFeed {animalData?.canFeed ? "true" : "false"}</h1>
-
-      <h1>canPlay {animalData?.canPlay ? "true" : "false"}</h1>
-
-      <h1>currentPoints {animalData?.currentPoints}</h1>
-
-      <h1>feedCount {animalData?.feedCount}</h1>
-
-      {/* <h1>
-        level {animalData?.level}
-      </h1> */}
-
-      <h1>name {animalData?.name}</h1>
-
-      <h1>needsBathroom {animalData?.needsBathroom ? "true" : "false"}</h1>
-
-      <h1>tired {animalData?.tired ? "true" : "false"}</h1>
-
-      <h5>soap_simple {foodData?.soap_simple}</h5>
-      <h5>soap_medium {foodData?.soap_medium}</h5>
-      <h5>soap_premium {foodData?.soap_premium}</h5>
-      <h5>carrot {foodData?.carrot}</h5>
+    <div className="grid new-page">
+      <div className="grid grid-cols-1 justify-items-center mb-20" >
+        <h5 className="text-4xl">Selecciona tu animal </h5>
+      </div>
+      <button onClick={fetchData}> cargar animales</button>
+      <div className={`grid  sm:grid-cols-1 md:grid-cols-${animalsOwner.length} lg:grid-cols-${animalsOwner.length}  xl:grid-cols-${animalsOwner.length}  2xl:grid-cols-4 justify-items-center`}>
+        
+      {animalsOwner.map((item:any)=>{
+        return(
+          <div className="card-animal"> {item?.name}</div>
+        );
+      })}
+      </div>
     </div>
   );
 }
