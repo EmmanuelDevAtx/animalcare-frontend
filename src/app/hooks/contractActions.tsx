@@ -16,8 +16,8 @@ interface ContractContextInterface {
   animalData: AnimalType | null;
   foodData: FoodType | null;
   CreateNewAnimal: (name: string) => void;
-  GetOwnAnimals: () => void;
-  CurrentAnimal: (index: number) => void;
+  GetOwnAnimals: () => Promise<number[]>;
+  CurrentAnimal: (index: number) => Promise<any>;
   EatAnimal: (animalId: number, foodId: number) => void;
   SharedAnimal: (animalId: number, address: string) => void;
   GetOwnFood: () => void;
@@ -27,8 +27,12 @@ export const ContractContext = createContext<ContractContextInterface>({
   animalData: null,
   foodData: null,
   CreateNewAnimal: () => {},
-  GetOwnAnimals: () => {},
-  CurrentAnimal: () => {},
+  GetOwnAnimals: async () => {
+    return [];
+  },
+  CurrentAnimal: async () => {
+    return null;
+  },
   EatAnimal: () => {},
   SharedAnimal: () => {},
   GetOwnFood: () => {},
@@ -61,24 +65,26 @@ export const ContractProvider = ({
     }
   }
 
-  async function GetOwnAnimals() {
+  async function GetOwnAnimals(): Promise<number[]> {
     try {
       if (!contractSigner) throw new Error("Contract not loaded");
       const response = await contractSigner.getAnimalsOwner({});
-      console.log(" response  gert total animal", response);
+      return response as number[];
     } catch (error: any) {
       console.error("Error getting own animals ", error?.data?.message);
+      return [];
     }
   }
 
-  async function CurrentAnimal(index: number) {
+  async function CurrentAnimal(index: number): Promise<any> {
     try {
       if (!contractSigner) throw new Error("Contract not loaded");
       const response = await contractSigner.animals(index);
-      console.log(" res  ", response);
+      return response;
       setAnimalData(response);
     } catch (error: any) {
       console.error("Error getting animal", error?.data?.message);
+      return null;
     }
   }
 
