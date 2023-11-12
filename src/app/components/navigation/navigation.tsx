@@ -10,7 +10,6 @@ import { createWeb3ModalConfig } from "@/app/helper";
 
 export const Navigation = () => {
   const pathname = usePathname();
-  createWeb3Modal(createWeb3ModalConfig());
   const { isConnected } = useWeb3ModalAccount();
 
   return (
