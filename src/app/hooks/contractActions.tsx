@@ -10,7 +10,8 @@ import { ethers } from "ethers";
 import { ContractAnimalCareABi } from "../contract/contractAnimalCareAbi";
 import { LOCAL_CONTRACT_ADDRESS } from "../config";
 import { AnimalType, FoodType } from "../types/animalType";
-import { useWeb3ModalSigner } from "@web3modal/ethers5/react";
+import { createWeb3Modal, useWeb3ModalSigner } from "@web3modal/ethers5/react";
+import { createWeb3ModalConfig } from "../helper";
 
 interface ContractContextInterface {
   animalData: AnimalType | null;
@@ -21,6 +22,7 @@ interface ContractContextInterface {
   EatAnimal: (animalId: number, foodId: number) => void;
   SharedAnimal: (animalId: number, address: string) => void;
   GetOwnFood: () => void;
+  GetAllAnimalData: () => Promise<any[]>;
 }
 
 export const ContractContext = createContext<ContractContextInterface>({
@@ -36,6 +38,7 @@ export const ContractContext = createContext<ContractContextInterface>({
   EatAnimal: () => {},
   SharedAnimal: () => {},
   GetOwnFood: () => {},
+  GetAllAnimalData: async () => [],
 });
 
 export const ContractProvider = ({
@@ -46,7 +49,7 @@ export const ContractProvider = ({
   const [animalData, setAnimalData] = useState<AnimalType | null>(null);
   const [foodData, setFoodData] = useState<FoodType | null>(null);
   const { walletProvider, signer } = useWeb3ModalSigner();
-
+  createWeb3Modal(createWeb3ModalConfig());
   const animalCareContract = new ethers.Contract(
     LOCAL_CONTRACT_ADDRESS!,
     ContractAnimalCareABi,
@@ -71,7 +74,7 @@ export const ContractProvider = ({
       const response = await contractSigner.getAnimalsOwner({});
       return response as number[];
     } catch (error: any) {
-      console.error("Error getting own animals ", error?.data?.message);
+      console.error("Error getting own animals ", error);
       return [];
     }
   }
@@ -80,8 +83,17 @@ export const ContractProvider = ({
     try {
       if (!contractSigner) throw new Error("Contract not loaded");
       const response = await contractSigner.animals(index);
-      return response;
-      setAnimalData(response);
+      let animalData: any = {};
+      animalData.canFeed = response.canFeed;
+      animalData.canPlay = response.canPlay;
+      animalData.needsBathroom = response.needsBathroom;
+
+      animalData.currentPoints = response.currentPoints;
+      animalData.feedCount = response.feedCount;
+      animalData.tired = response.tired;
+      animalData.name = response.name;
+
+      return animalData  as AnimalType;
     } catch (error: any) {
       console.error("Error getting animal", error?.data?.message);
       return null;
@@ -121,6 +133,21 @@ export const ContractProvider = ({
     }
   }
 
+  async function GetAllAnimalData(): Promise<any[]> {
+    try {
+      let resonseArray:AnimalType[]=[];
+      const animals = await GetOwnAnimals();
+      for(let i = 0; i <= animals.length ; i++){
+        const currentAnimal: AnimalType = await CurrentAnimal(i);
+        resonseArray.push(currentAnimal);
+      }
+      return resonseArray;
+    } catch (error) {
+      console.error("Error get own food", error);
+      return [];
+    }
+  }
+
   return (
     <ContractContext.Provider
       value={{
@@ -132,6 +159,7 @@ export const ContractProvider = ({
         EatAnimal,
         SharedAnimal,
         GetOwnFood,
+        GetAllAnimalData,
       }}
     >
       {children}

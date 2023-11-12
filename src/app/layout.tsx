@@ -14,10 +14,10 @@ export default function RootLayout({
     <html lang="es" className="dark">
       <body>
         <ContractProvider>
-          <div className="bg-fixed bg-cover bg-center h-screen bg-black background-custom">
+          <div className="bg-fixed bg-cover bg-center h-screen bg-black background-custom" />
             <Navigation />
             {children}
-          </div>
+          
         </ContractProvider>
       </body>
     </html>
