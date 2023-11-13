@@ -15,3 +15,9 @@ Dark to ligth
 #98A9BE
 #B4C5D8
 */
+
+button {
+  color: #B4C5D8;
+  max-width: 150px;
+  padding: 3px;
+}

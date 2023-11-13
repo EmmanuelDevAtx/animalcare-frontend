@@ -33,8 +33,8 @@ export const createWeb3ModalConfig= ()=>{
     chainId: 1337,
     name: "Ganache",
     currency: "ETH",
-    explorerUrl: "http://192.168.1.181:7545",
-    rpcUrl: "http://192.168.1.181:7545",
+    explorerUrl: "http://127.0.0.1:7545",
+    rpcUrl: "http://127.0.0.1:7545",
   };
 
   const metadata = {
