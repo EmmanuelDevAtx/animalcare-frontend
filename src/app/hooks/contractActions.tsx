@@ -16,7 +16,7 @@ import { createWeb3ModalConfig } from "../helper";
 interface ContractContextInterface {
   animalData: AnimalType | null;
   foodData: FoodType | null;
-  CreateNewAnimal: (name: string) => void;
+  CreateNewAnimal: (name: string, callBackfunction?:()=> void) => void;
   GetOwnAnimals: () => Promise<number[]>;
   CurrentAnimal: (index: number) => Promise<any>;
   EatAnimal: (animalId: number, foodId: number) => void;
@@ -58,10 +58,11 @@ export const ContractProvider = ({
 
   const contractSigner = animalCareContract.connect(signer as ethers.Signer);
 
-  async function CreateNewAnimal(name: string) {
+  async function CreateNewAnimal(name: string, callBackfunction?:()=> void) {
     try {
       if (!contractSigner) throw new Error("Contract not loaded");
       const response = await contractSigner.createNewAnimal(name);
+      callBackfunction && callBackfunction();
       console.log(" response ", response);
     } catch (error: any) {
       console.error("Error creating new animal ", error?.data?.message);
@@ -137,8 +138,8 @@ export const ContractProvider = ({
     try {
       let resonseArray:AnimalType[]=[];
       const animals = await GetOwnAnimals();
-      for(let i = 0; i <= animals.length ; i++){
-        const currentAnimal: AnimalType = await CurrentAnimal(i);
+      for(let i = 0; i < animals.length ; i++){
+        const currentAnimal: AnimalType = await CurrentAnimal(animals[i]);
         resonseArray.push(currentAnimal);
       }
       return resonseArray;
