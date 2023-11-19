@@ -30,7 +30,7 @@ export const createWeb3ModalConfig= ()=>{
   };
 
   const ganache = {
-    chainId: 1337,
+    chainId: 5777,
     name: "Ganache",
     currency: "ETH",
     explorerUrl: "http://127.0.0.1:7545",

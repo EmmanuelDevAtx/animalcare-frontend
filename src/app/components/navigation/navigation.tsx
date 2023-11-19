@@ -13,7 +13,7 @@ export const Navigation = () => {
   const { isConnected } = useWeb3ModalAccount();
 
   return (
-    <nav className="borderBottomLine flex items-center justify-between p-4 backdrop-blur-xl shadow-xl filter brightness-125 ">
+    <nav className="borderBottomLine flex items-center justify-between p-4 backdrop-blur-xl">
       <h1 className="text-2xl">Animal care</h1>
       <div className="flex space-x-4">
         <a

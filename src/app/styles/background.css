@@ -20,7 +20,7 @@
   z-index: -1;
   height: 100%;
   width: 100%;
-  background-color: hsla(0, 0%, 5%, 1);
+  background-color: rgb(13, 13, 21);
   background-image: radial-gradient(
       at 99% 0%,
       hsla(204, 100%, 50%, 0.08) 0px,

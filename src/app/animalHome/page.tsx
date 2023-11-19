@@ -74,6 +74,33 @@ export default function AnimalHome() {
         animalsOwner={animalsOwner}
         setIsOpenModal={setIsOpenModal}
       />
+  <GetCards
+        isLoadData={isLoadData}
+        animalsOwner={animalsOwner}
+        setIsOpenModal={setIsOpenModal}
+      /><GetCards
+      isLoadData={isLoadData}
+      animalsOwner={animalsOwner}
+      setIsOpenModal={setIsOpenModal}
+    /><GetCards
+    isLoadData={isLoadData}
+    animalsOwner={animalsOwner}
+    setIsOpenModal={setIsOpenModal}
+  /><GetCards
+  isLoadData={isLoadData}
+  animalsOwner={animalsOwner}
+  setIsOpenModal={setIsOpenModal}
+/><GetCards
+        isLoadData={isLoadData}
+        animalsOwner={animalsOwner}
+        setIsOpenModal={setIsOpenModal}
+      /><GetCards
+      isLoadData={isLoadData}
+      animalsOwner={animalsOwner}
+      setIsOpenModal={setIsOpenModal}
+    />
+
+
       {isOpenModal && (
         <ModalCustom
           isOpen={isOpenModal}
@@ -138,7 +165,7 @@ const GetCards = ({
             whileHover={{ scale: 1.2 }}
             transition={{
               type: "spring",
-              stiffness: 260,
+              stiffness: 70,
               damping: 20,
             }}
           >
@@ -204,8 +231,6 @@ const GetCards = ({
         </div>
       );
     case 2:
-      console.log('length 2', animalsOwner.length);
-
       return (
         <div
           className={
@@ -216,8 +241,6 @@ const GetCards = ({
         </div>
       );
     default:
-      console.log('length De', animalsOwner.length);
-
       return (
         <div
           className={
