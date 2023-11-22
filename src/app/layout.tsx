@@ -4,6 +4,7 @@ import "./styles/background.css";
 import "./styles/styles.css";
 import { Navigation } from "./components/navigation/navigation";
 import { ContractProvider } from "./hooks/contractActions";
+import { TestThreeJs } from "./components/custom/testThree";
 
 export default function RootLayout({
   children,

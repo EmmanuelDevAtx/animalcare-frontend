@@ -7,6 +7,7 @@ import { AnimalType } from "../types/animalType";
 import { motion } from "framer-motion";
 import { ModalCustom } from "../components/custom/modalCustom";
 import { InputFileCustom } from "../components/custom/inputFileCustom";
+import { TestThreeJs } from "../components/custom/testThree";
 
 export default function AnimalHome() {
   const { walletProvider, signer } = useWeb3ModalSigner();
@@ -34,6 +35,7 @@ export default function AnimalHome() {
 
   return (
     <div className="grid new-page">
+      <TestThreeJs/>
       <div className="grid justify-items-center mb-20">
         <h5 className="text-4xl">Selecciona tu animal </h5>
       </div>
