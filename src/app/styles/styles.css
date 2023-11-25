@@ -82,6 +82,20 @@ input {
   width: 100%;
   background-color: transparent;
 }
+
+.container-threejs{
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.frame-cubejs{
+  height: 1000px;
+  width: 1000px;
+}
+
 /* 
 Dark to ligth 
 

@@ -35,7 +35,7 @@ export default function AnimalHome() {
 
   return (
     <div className="grid new-page">
-      <TestThreeJs/>
+
       <div className="grid justify-items-center mb-20">
         <h5 className="text-4xl">Selecciona tu animal </h5>
       </div>
@@ -76,32 +76,6 @@ export default function AnimalHome() {
         animalsOwner={animalsOwner}
         setIsOpenModal={setIsOpenModal}
       />
-  <GetCards
-        isLoadData={isLoadData}
-        animalsOwner={animalsOwner}
-        setIsOpenModal={setIsOpenModal}
-      /><GetCards
-      isLoadData={isLoadData}
-      animalsOwner={animalsOwner}
-      setIsOpenModal={setIsOpenModal}
-    /><GetCards
-    isLoadData={isLoadData}
-    animalsOwner={animalsOwner}
-    setIsOpenModal={setIsOpenModal}
-  /><GetCards
-  isLoadData={isLoadData}
-  animalsOwner={animalsOwner}
-  setIsOpenModal={setIsOpenModal}
-/><GetCards
-        isLoadData={isLoadData}
-        animalsOwner={animalsOwner}
-        setIsOpenModal={setIsOpenModal}
-      /><GetCards
-      isLoadData={isLoadData}
-      animalsOwner={animalsOwner}
-      setIsOpenModal={setIsOpenModal}
-    />
-
 
       {isOpenModal && (
         <ModalCustom
