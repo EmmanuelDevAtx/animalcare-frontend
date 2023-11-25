@@ -8,9 +8,9 @@ import React, {
 } from "react";
 import { ethers } from "ethers";
 import { ContractAnimalCareABi } from "../contract/contractAnimalCareAbi";
-import { LOCAL_CONTRACT_ADDRESS } from "../config";
+import { GANACHE_CONTRACT_ADDRESS, LOCAL_CONTRACT_ADDRESS, MUMBAI_CONTRACT_ADDRESS } from "../config";
 import { AnimalType, FoodType } from "../types/animalType";
-import { createWeb3Modal, useWeb3ModalSigner } from "@web3modal/ethers5/react";
+import { createWeb3Modal, useWeb3ModalSigner, useWeb3ModalState } from "@web3modal/ethers5/react";
 import { createWeb3ModalConfig } from "../helper";
 
 interface ContractContextInterface {
@@ -50,8 +50,24 @@ export const ContractProvider = ({
   const [foodData, setFoodData] = useState<FoodType | null>(null);
   const { walletProvider, signer } = useWeb3ModalSigner();
   createWeb3Modal(createWeb3ModalConfig());
+
+  const { selectedNetworkId } = useWeb3ModalState()
+
+  function GetContractAddress(): string {
+    switch (`${selectedNetworkId}`) {
+      case "80003":
+        return MUMBAI_CONTRACT_ADDRESS!
+      case "5777":
+        return GANACHE_CONTRACT_ADDRESS!
+      case "80002":
+        return LOCAL_CONTRACT_ADDRESS!
+      default:
+        return LOCAL_CONTRACT_ADDRESS!;
+    }
+  }
+  
   const animalCareContract = new ethers.Contract(
-    LOCAL_CONTRACT_ADDRESS!,
+    GetContractAddress(),
     ContractAnimalCareABi,
     walletProvider
   );

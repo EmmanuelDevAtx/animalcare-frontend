@@ -1,9 +1,11 @@
 import { createWeb3Modal, defaultConfig } from "@web3modal/ethers5";
-import { WALLET_CONNECT_PROJECT } from "../config";
+import { ENVIROMENT, WALLET_CONNECT_PROJECT } from "../config";
 
-export const createWeb3ModalConfig= ()=>{
-
+export const createWeb3ModalConfig = () => {
   const projectId = WALLET_CONNECT_PROJECT!;
+  const enviroment = ENVIROMENT;
+
+  console.log("enviroment ", enviroment);
 
   const mainnet = {
     chainId: 1,
@@ -14,7 +16,7 @@ export const createWeb3ModalConfig= ()=>{
   };
 
   const mumbai = {
-    chainId: 80001,
+    chainId: 80003,
     name: "Mumbai",
     currency: "MATIC",
     explorerUrl: "https://mumbai.polygonscan.com/",
@@ -22,7 +24,7 @@ export const createWeb3ModalConfig= ()=>{
   };
 
   const local = {
-    chainId: 80001,
+    chainId: 80002,
     name: "local ETH",
     currency: "ETH",
     explorerUrl: "http://127.0.0.1:8545/",
@@ -43,6 +45,20 @@ export const createWeb3ModalConfig= ()=>{
     url: "http://localhost:3000/",
     icons: ["https://avatars.mywebsite.com/"],
   };
+
+  function GetNetWorks(): any[] {
+    switch (enviroment) {
+      case "local":
+        return [local, ganache, mumbai];
+      case "staging":
+        return [mumbai];
+      case "production":
+        return [mumbai];
+      default:
+        return [];
+    }
+  }
+  const networksData = GetNetWorks();
   return {
     ethersConfig: defaultConfig({
       metadata,
@@ -52,7 +68,7 @@ export const createWeb3ModalConfig= ()=>{
       enableCoinbase: true,
       rpcUrl: "...", // used for the Coinbase SDK
     }),
-    chains: [mainnet, mumbai, local, ganache],
+    chains: networksData,
     projectId,
-  }
-}
+  };
+};
