@@ -4,12 +4,12 @@ import { ConnectWallet } from "./components/connectWallet/connectWallet";
 import { TestThreeJs } from "./components/custom/testThree";
 
 export default function Home() {
-
-  // TestThreeJs();
+  
   return (
-    <main>
-      <TestThreeJs/>
-      <h1>ola</h1>
-    </main>
+    <div>
+      <TestThreeJs />
+      <main>
+      </main>
+    </div>
   );
 }

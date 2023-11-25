@@ -1,12 +1,14 @@
 import React, { MutableRefObject, RefObject, useEffect, useRef } from "react";
 import * as THREE from "three";
+import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 
+// TODO: Refactor all this ccode to use diferents models 
 export function TestThreeJs() {
   const containerRef: any = useRef();
-
   const scene = new THREE.Scene();
+  
   let number = 1;
-
   if (
     typeof window !== "undefined" &&
     typeof document !== "undefined" &&
@@ -14,6 +16,7 @@ export function TestThreeJs() {
     typeof containerRef !== "undefined"
   ) {
     useEffect(() => {
+      let loadedObject:any;
       number++;
       //TODO: check why is redering 2 componens using useEffect
       if (number == 2) {
@@ -28,23 +31,46 @@ export function TestThreeJs() {
           0.1,
           1000
         );
+        const mtlLoader = new MTLLoader();
+        const loader = new OBJLoader();
+        mtlLoader.load("./3dModels/custom/custom.mtl", mtlParseResult => {
+          loader.setMaterials(mtlParseResult);
+          loader.load(
+            "./3dModels/custom/custom.obj",
+            function (object: any) {
+              object.scale.x=0.3
+              object.scale.y=0.3
+              object.scale.z=0.3
+              object.up.y=0
+              object.materialLibraries.push('/3dModels/custom/custom.mtl')
+              loadedObject = object
+              scene.add(object);
+            },
+            function (xhr: any) {
+              console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+            },
+            function (error: any) {
+              console.log("An error happened");
+            }
+          );
+  
+      });
 
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
+
+
         renderer.setClearColor(0x00000000, 0);
         const light = new THREE.SpotLight(0xffffff);
         light.position.set(5, 5, 5);
         scene.add(light);
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.3); // Color blanco y intensidad 0.5
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.2); // Color blanco y intensidad 0.5
         scene.add(ambientLight);
         camera.position.z = 5;
         containerRef.current.appendChild(renderer.domElement);
         const animate = () => {
-          // Rotar el cubo
-          cube.rotation.x += 0.01;
-          cube.rotation.y += 0.01;
+          if (loadedObject) {
+            loadedObject.rotation.y += 0.01;
+            loadedObject.rotation.x += 0.001;
+          }
           renderer.render(scene, camera);
           requestAnimationFrame(animate);
         };
@@ -56,7 +82,7 @@ export function TestThreeJs() {
 
   return (
     <div className="container-threejs bg-cover bg-fixed bg-center h-screen">
-      <div className="frame-cubejs" ref={containerRef}  />
+      <div className="frame-cubejs" ref={containerRef} />
     </div>
   );
 }
