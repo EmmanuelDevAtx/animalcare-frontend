@@ -5,8 +5,6 @@ export const createWeb3ModalConfig = () => {
   const projectId = WALLET_CONNECT_PROJECT!;
   const enviroment = ENVIROMENT;
 
-  console.log("enviroment ", enviroment);
-
   const mainnet = {
     chainId: 1,
     name: "Ethereum",
