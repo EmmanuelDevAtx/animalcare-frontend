@@ -7,7 +7,7 @@ export default function Home() {
   
   return (
     <div>
-      <TestThreeJs />
+      
       <main>
       </main>
     </div>
