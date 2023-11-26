@@ -85,8 +85,8 @@ export default function AnimalHome() {
           }}
         >
           <div className="grid justify-items-center">
-            <div className="grid sm:grid-cols-1 lg:grid-cols-1  xl:grid-cols-1  2xl:grid-cols-3 justify-items-center w-full x-full">
-              <form className="grid sm:grid-cols-1 lg:grid-cols-1  xl:grid-cols-1  2xl:grid-cols-3 justify-items-center">
+            <div className="grid sm:grid-cols-1 lg:grid-cols-1  xl:grid-cols-1  2xl:grid-cols-2 justify-items-center w-full x-full">
+              <form className="grid sm:grid-cols-1 lg:grid-cols-1  xl:grid-cols-1  2xl:grid-cols-1 justify-items-center">
                 <h1>Formulario</h1>
                 <InputFileCustom inputRef={animalName} />
                 <button
@@ -184,7 +184,7 @@ const GetCards = ({
     ));
   switch (animalsOwner.length-1 as number) {
     case 0:
-      console.log('length 0', animalsOwner.length);
+      
       return (
         <div
           className={
@@ -195,8 +195,6 @@ const GetCards = ({
         </div>
       );
     case 1:
-      console.log('length 1', animalsOwner.length);
-
       return (
         <div
           className={

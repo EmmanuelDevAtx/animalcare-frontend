@@ -15,10 +15,13 @@ export default function RootLayout({
     <html lang="es" className="dark">
       <body>
         <ContractProvider>
-          <div className="bg-fixed bg-cover h-screen bg-black background-custom" />
-            <Navigation />
-            {children}
-          
+          <div className="bg-fixed bg-cover h-screen bg-black background-custom" style={{zIndex: -1}} />
+          <TestThreeJs />
+          <div style={{zIndex:2}}>
+          <Navigation />
+          {children}
+
+          </div>
         </ContractProvider>
       </body>
     </html>
