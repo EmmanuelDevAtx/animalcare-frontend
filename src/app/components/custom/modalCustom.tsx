@@ -14,28 +14,16 @@ export const ModalCustom = ({
   useEffect(() => {
     setTimeout(() => setOpacity(1), 1);
   }, []);
+  
   if (!isOpen) return null;
 
-  function hideModalCustom(){
+  function hideModalCustom() {
     setOpacity(0);
     setTimeout(() => hideModal(), 400);
   }
   return (
-    <div
-      className="modalOverlay"
-      style={{ opacity: opacity }}
-    >
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: opacity }}
-        transition={{
-          type: "spring",
-          stiffness: 260,
-          damping: 20,
-        }}
-      >
-        <div className="modalContent">{children}</div>
-      </motion.div>
+    <div className="modalOverlay" style={{ opacity: opacity }} onClick={hideModalCustom}>
+        {children}
     </div>
   );
 };

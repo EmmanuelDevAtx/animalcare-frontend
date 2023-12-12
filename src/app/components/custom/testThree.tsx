@@ -74,7 +74,6 @@ export function TestThreeJs() {
         scene.add(ambientLight);
         camera.position.z = 5;
         containerRef.current.appendChild(renderer.domElement);
-        const controls =new OrbitControls(camera, renderer.domElement);
         const animate = () => {
           if (loadedObject) {
             loadedObject.rotation.y += 0.01;
@@ -83,7 +82,6 @@ export function TestThreeJs() {
           renderer.render(scene, camera);
           requestAnimationFrame(animate);
         };
-        controls.update();
         animate();
       }
     }

@@ -97,6 +97,16 @@ input {
   width: 1000px;
 }
 
+.icon-button {
+  border-radius: 18px;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.icon-button:hover{
+  opacity: 0.2;
+  background-color:#14181c;
+}
+
 /* 
 Dark to ligth 
 

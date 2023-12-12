@@ -35,41 +35,43 @@ export default function AnimalHome() {
 
   return (
     <div className="grid new-page">
-
       <div className="grid justify-items-center mb-20">
         <h5 className="text-4xl">Selecciona tu animal </h5>
       </div>
       <div className="grid justify-items-center">
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        whileHover={{ scale: 1.1 }}
-        transition={{
-          type: "spring",
-          stiffness: 260,
-          damping: 20,
-        }}
-      >
-        <button className="custom-button" onClick={fetchData}>
-          Load animals
-        </button>
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          whileHover={{ scale: 1.1 }}
+          transition={{
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
+        >
+          <button className="custom-button" onClick={fetchData}>
+            Load animals
+          </button>
         </motion.div>
       </div>
       <div className="grid justify-items-center">
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        whileHover={{ scale: 1.1 }}
-        transition={{
-          type: "spring",
-          stiffness: 260,
-          damping: 20,
-        }}
-      >
-        <button className="custom-button" onClick={() => setIsOpenModal(true)}>
-          Crear nuevo animal
-        </button>
-      </motion.div>
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          whileHover={{ scale: 1.1 }}
+          transition={{
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
+        >
+          <button
+            className="custom-button"
+            onClick={() => setIsOpenModal(true)}
+          >
+            Crear nuevo animal
+          </button>
+        </motion.div>
       </div>
       <GetCards
         isLoadData={isLoadData}
@@ -84,27 +86,29 @@ export default function AnimalHome() {
             setIsOpenModal(false);
           }}
         >
-          <div className="grid justify-items-center">
-            <div className="grid sm:grid-cols-1 lg:grid-cols-1  xl:grid-cols-1  2xl:grid-cols-2 justify-items-center w-full x-full">
-              <form className="grid sm:grid-cols-1 lg:grid-cols-1  xl:grid-cols-1  2xl:grid-cols-1 justify-items-center">
-                <h1>Formulario</h1>
-                <InputFileCustom inputRef={animalName} />
+          <div className="modalContent">
+            <div className="grid justify-items-center">
+              <div className="grid sm:grid-cols-1 lg:grid-cols-1  xl:grid-cols-1  2xl:grid-cols-2 justify-items-center w-full x-full">
+                <form className="grid sm:grid-cols-1 lg:grid-cols-1  xl:grid-cols-1  2xl:grid-cols-1 justify-items-center">
+                  <h1>Formulario</h1>
+                  <InputFileCustom inputRef={animalName} />
+                  <button
+                    onClick={() => {
+                      CreateNewAnimal(animalName?.current?.value, fetchData);
+                      setIsOpenModal(false);
+                    }}
+                  >
+                    Enviar
+                  </button>
+                </form>
                 <button
                   onClick={() => {
-                    CreateNewAnimal(animalName?.current?.value, fetchData);
                     setIsOpenModal(false);
                   }}
                 >
-                  Enviar
+                  cancelar
                 </button>
-              </form>
-              <button
-                onClick={() => {
-                  setIsOpenModal(false);
-                }}
-              >
-                cancelar
-              </button>
+              </div>
             </div>
           </div>
         </ModalCustom>
@@ -161,7 +165,7 @@ const GetCards = ({
       })
     ) : (
       <motion.div
-      className="my-20"
+        className="my-20"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.1 }}
@@ -182,9 +186,8 @@ const GetCards = ({
         </button>
       </motion.div>
     ));
-  switch (animalsOwner.length-1 as number) {
+  switch ((animalsOwner.length - 1) as number) {
     case 0:
-      
       return (
         <div
           className={

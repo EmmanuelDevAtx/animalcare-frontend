@@ -20,7 +20,7 @@ export const ScreenInformationProvider = ({
 }) => {
   const [screenHeight, setScreenHeight] = useState<number>(0);
   const [screenWidth, setScreenWidth] = useState<number>(0);
-  const isSmall = screenWidth >= 600;
+  const isSmall = screenWidth >= 650;
 
   React.useEffect(() => {
     const handleResize = () => {
