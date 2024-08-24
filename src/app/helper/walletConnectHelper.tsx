@@ -2,7 +2,7 @@ import { createWeb3Modal, defaultConfig } from "@web3modal/ethers5";
 import { ENVIROMENT, WALLET_CONNECT_PROJECT } from "../config";
 
 export const createWeb3ModalConfig = () => {
-  const projectId = WALLET_CONNECT_PROJECT!;
+  const projectId = 'eb691bdba164d5184a820418e54e480f';
   const enviroment = ENVIROMENT;
 
   const mainnet = {
