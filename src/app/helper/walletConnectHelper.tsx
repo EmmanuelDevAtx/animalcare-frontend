@@ -67,6 +67,6 @@ export const createWeb3ModalConfig = () => {
       rpcUrl: "...", // used for the Coinbase SDK
     }),
     chains: networksData,
-    projectId,
+    projectId:'eb691bdba164d5184a820418e54e480f',
   };
 };
