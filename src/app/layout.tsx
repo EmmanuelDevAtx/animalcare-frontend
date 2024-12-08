@@ -14,18 +14,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className="dark">
-      <body>
+      <body >
         <ScreenInformationProvider>
           <ContractProvider>
-            <div
-              className="bg-fixed bg-cover h-screen bg-black background-custom"
-              style={{ zIndex: -1 }}
-            />
-            <TestThreeJs />
-            <div style={{ zIndex: 2 }}>
-              <Navigation />
-              {children}
+            <div className='fixed'>
+              {/* <TestThreeJs /> */}
             </div>
+            <div className="background-custom" />
+            <Navigation />
+            <main className=' px-40 py-20 '>
+                {children}
+            </main>
           </ContractProvider>
         </ScreenInformationProvider>
       </body>

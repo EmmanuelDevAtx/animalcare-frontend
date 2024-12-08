@@ -1,16 +1,12 @@
 "use client";
-import { useWeb3ModalSigner } from "@web3modal/ethers5/react";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { ContractContext } from "../hooks/contractActions";
 import "../styles/background.css";
-import { AnimalType } from "../types/animalType";
 import { motion } from "framer-motion";
 import { ModalCustom } from "../components/custom/modalCustom";
 import { InputFileCustom } from "../components/custom/inputFileCustom";
-import { TestThreeJs } from "../components/custom/testThree";
 
 export default function AnimalHome() {
-  const { walletProvider, signer } = useWeb3ModalSigner();
   const [animalsOwner, setAnimalsOwner] = useState<any[]>([]);
   const { CreateNewAnimal, GetAllAnimalData } = useContext(ContractContext);
   const [isLoadData, setIsLoadData] = useState<boolean>(false);

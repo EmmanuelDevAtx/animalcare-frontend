@@ -13,38 +13,45 @@ export const Navigation = () => {
   const { isConnected } = useWeb3ModalAccount();
 
   return (
-    <nav className="borderBottomLine flex items-center justify-between p-4 backdrop-blur-xl">
-      <h1 className="text-2xl">Animal care</h1>
-      <div className="flex space-x-4">
-        <a
-          className={`hover:text-blue-600 ${
-            pathname === "/" && "text-blue-600"
-          } text-lg font-semibold relative`}
-          href="/"
-          style={{
-            textShadow: `0 0 0px rgba(0, 0, 255, 1`,
-          }}
-        >
-          Landing
-        </a>
-        {isConnected && (
-          <a
-            className={`hover:text-blue-600 ${
-              pathname === "/animalHome" && "text-blue-600"
-            }`}
-            href="/animalHome"
-          >
-            Animal Home
-          </a>
-        )}
-        <a className="hover:text-blue-600" href="#contact">
-          Contact
-        </a>
-        <a className="hover:text-blue-600" href="#about">
-          About
-        </a>
+    <nav className="fixed top-0 right-0 left-0 items-center flex justify-between p-4 backdrop-blur-xl">
+      <div className="flex w-full justify-between items-center gap-8 ">
+        <p className='flex-1 text-white font-medium text-2xl'>
+          <span className='title-text-1'>Ani</span>
+          <span className='title-text-2'>mal </span>
+          <span className='title-text-3'>Care</span>
+        </p>
+        <ul className='flex flex-row flex-1 gap-3 justify-center'>
+          <li>
+            <a
+              className={`text-white font-light transition-colors duration-700 text-sm  ${pathname == '/' ? ' navigation-hover-active ' : ' navigation-hover '}`}
+              href='/'>
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              className={`text-white font-light transition-colors duration-700 text-sm ${pathname == '/animalHome' ? ' navigation-hover-active ' : ' navigation-hover '}`}
+              href="/animalHome">
+              Animal Home
+            </a>
+          </li>
+          <li>
+            <a
+              className={`text-white font-light transition-colors duration-700 text-sm ${pathname == '/contact' ? ' navigation-hover-active ' : ' navigation-hover '}`}
+              href='/contact'>
+              Contact
+            </a>
+          </li>
+          <li>
+            <a
+              className={`text-white font-light transition-colors duration-700 text-sm ${pathname == '/about' ? ' navigation-hover-active ' : ' navigation-hover '}`}
+              href='/about'>
+              About
+            </a>
+          </li>
+        </ul>
+        <ConnectWallet />
       </div>
-      <ConnectWallet />
     </nav>
   );
 };

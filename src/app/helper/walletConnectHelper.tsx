@@ -2,7 +2,7 @@ import { createWeb3Modal, defaultConfig } from "@web3modal/ethers5";
 import { ENVIROMENT, WALLET_CONNECT_PROJECT } from "../config";
 
 export const createWeb3ModalConfig = () => {
-  const projectId = WALLET_CONNECT_PROJECT!;
+  const projectId = 'eb691bdba164d5184a820418e54e480f';
   const enviroment = ENVIROMENT;
 
   const mainnet = {
@@ -56,6 +56,9 @@ export const createWeb3ModalConfig = () => {
         return [];
     }
   }
+
+  console.log('Me ')
+
   const networksData = GetNetWorks();
   return {
     ethersConfig: defaultConfig({
@@ -67,6 +70,6 @@ export const createWeb3ModalConfig = () => {
       rpcUrl: "...", // used for the Coinbase SDK
     }),
     chains: networksData,
-    projectId,
+    projectId:'eb691bdba164d5184a820418e54e480f',
   };
 };

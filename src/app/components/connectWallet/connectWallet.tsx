@@ -5,29 +5,25 @@ export const ConnectWallet = () => {
   const { open } = useWeb3Modal();
   const { address, isConnected } = useWeb3ModalAccount();
 
-  function reducirTexto(texto: string) {
-    if (texto.length < 7) {
-      return texto;
+  function textReducer(text: string) {
+    if (text.length < 7) {
+      return text;
     }
-    const primerasTresLetras = texto.substring(0, 5);
-    const ultimasCuatroLetras = texto.substring(texto.length - 6);
-    return primerasTresLetras + "..." + ultimasCuatroLetras;
+    return text.substring(0, 5) + "..." + text.substring(text.length - 6);
   }
 
   return (
-    <div className="flex flex-row">
-      <button className="transition duration-150 ease-in-out" onClick={() => open({ view: "Networks" })}>
-        <EthIcon style={{ height: 50, width: 50 }} />
+    <div className="flex flex-row flex-1 justify-end gap-4">
+      <button className="transition duration-700 ease-in-out border px-1.5 rounded-full" onClick={() => open({ view: "Networks" })}>
+        <EthIcon style={{ height: 20, width: 20 }} />
       </button>
       <button
-        className="transition duration-150 ease-in-out walletBottom rounded-lg outline outline-offset-2 outline-blue-500 "
+        className="transition-colors duration-700 ease-in-out walletBottom rounded-xl text-white outline outline-teal-400 px-4 py-1 navigation-hover"
         onClick={() => open()}
       >
-        <h1>
-          {isConnected
-            ? reducirTexto(address as string)
-            : "collect your walelt"}
-        </h1>
+        {isConnected
+          ? textReducer(address as string)
+          : "Connect"}
       </button>
     </div>
   );

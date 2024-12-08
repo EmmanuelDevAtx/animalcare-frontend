@@ -49,6 +49,7 @@ export const ContractProvider = ({
   const [animalData, setAnimalData] = useState<AnimalType | null>(null);
   const [foodData, setFoodData] = useState<FoodType | null>(null);
   const { walletProvider, signer } = useWeb3ModalSigner();
+  
   createWeb3Modal(createWeb3ModalConfig());
 
   const { selectedNetworkId } = useWeb3ModalState()
@@ -65,6 +66,7 @@ export const ContractProvider = ({
         return LOCAL_CONTRACT_ADDRESS!;
     }
   }
+
   
   const animalCareContract = new ethers.Contract(
     GetContractAddress(),
