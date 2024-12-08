@@ -66,6 +66,8 @@ export const ContractProvider = ({
         return LOCAL_CONTRACT_ADDRESS!;
     }
   }
+
+  console.log(`El address es : ${GetContractAddress()}`)
   
   const animalCareContract = new ethers.Contract(
     GetContractAddress(),
