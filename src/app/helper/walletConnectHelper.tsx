@@ -56,6 +56,9 @@ export const createWeb3ModalConfig = () => {
         return [];
     }
   }
+
+  console.log('Me ')
+
   const networksData = GetNetWorks();
   return {
     ethersConfig: defaultConfig({
