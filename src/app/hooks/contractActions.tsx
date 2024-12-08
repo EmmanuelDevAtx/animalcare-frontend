@@ -67,7 +67,7 @@ export const ContractProvider = ({
     }
   }
 
-  console.log(`El address es : ${GetContractAddress()}`)
+  console.log(`El address es : ${GANACHE_CONTRACT_ADDRESS}`)
   
   const animalCareContract = new ethers.Contract(
     GetContractAddress(),
